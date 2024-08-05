@@ -1,0 +1,30 @@
+name: atm_simulator
+description: "A new Flutter project."
+publish_to: 'none' # Remover esta línea si deseas publicar en pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  flutter_animate: ^4.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/fondo1.jpg
+    - assets/images/fondo2.jpg
+    - assets/images/fondo3.jpg
+    - assets/images/tarjeta.png
+    - assets/images/tarjeta_perfil.png
+    - assets/images/ingreso_clave.png
+    - assets/images/logo.png
