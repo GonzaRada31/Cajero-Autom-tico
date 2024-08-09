@@ -1,7 +1,9 @@
+// lib/main.dart
 import 'package:flutter/material.dart';
 import 'screens/pantalla_inicio.dart';
 import 'screens/insertar_tarjeta.dart';
 import 'screens/ingresar_clave.dart';
+import 'screens/menu_principal.dart';
 
 void main() {
   runApp(const SimuladorCajeroApp());
@@ -17,11 +19,9 @@ class SimuladorCajeroApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.transparent, // Hacer el fondo del AppBar transparente
-          elevation: 0, // Quitar la sombra del AppBar
-          titleTextStyle: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
           centerTitle: true,
-          iconTheme: IconThemeData(color: Colors.white),
         ),
       ),
       initialRoute: '/',
@@ -29,6 +29,7 @@ class SimuladorCajeroApp extends StatelessWidget {
         '/': (context) => const PantallaInicio(),
         '/insertar_tarjeta': (context) => const InsertarTarjetaScreen(),
         '/ingresar_clave': (context) => const IngresarClaveScreen(),
+        '/menu_principal': (context) => const MenuPrincipalScreen(),
       },
     );
   }

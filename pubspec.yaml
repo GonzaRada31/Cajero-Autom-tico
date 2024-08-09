@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   cupertino_icons: ^1.0.6
   flutter_animate: ^4.0.1
 
@@ -24,7 +25,7 @@ flutter:
     - assets/images/fondo1.jpg
     - assets/images/fondo2.jpg
     - assets/images/fondo3.jpg
+    - assets/images/logo.png
     - assets/images/tarjeta.png
     - assets/images/tarjeta_perfil.png
     - assets/images/ingreso_clave.png
-    - assets/images/logo.png

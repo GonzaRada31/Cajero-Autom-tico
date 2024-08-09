@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:atm_simulator/styles/styles.dart';
 import 'dart:async';
-import 'ingresar_clave.dart'; // Importa la pantalla de ingreso de clave
+import 'ingresar_clave.dart';
 
 class InsertarTarjetaScreen extends StatefulWidget {
   const InsertarTarjetaScreen({super.key});
 
   @override
-  _InsertarTarjetaScreenState createState() => _InsertarTarjetaScreenState();
+  InsertarTarjetaScreenState createState() => InsertarTarjetaScreenState();
 }
 
-class _InsertarTarjetaScreenState extends State<InsertarTarjetaScreen> with SingleTickerProviderStateMixin {
+class InsertarTarjetaScreenState extends State<InsertarTarjetaScreen> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _animation;
   bool _isReading = false;
@@ -29,7 +30,7 @@ class _InsertarTarjetaScreenState extends State<InsertarTarjetaScreen> with Sing
       curve: Curves.easeInOut,
     ));
 
-    _controller.forward().then((_) {
+    _controller.forward().then((_) {  // Se ejecuta cuando la animación termina
       setState(() {
         _isReading = true;
       });
@@ -43,7 +44,7 @@ class _InsertarTarjetaScreenState extends State<InsertarTarjetaScreen> with Sing
       });
     });
   }
-
+  // Se usa para liberar recursos cuando el widget es eliminado 
   @override
   void dispose() {
     _controller.dispose();
@@ -53,31 +54,17 @@ class _InsertarTarjetaScreenState extends State<InsertarTarjetaScreen> with Sing
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Simulador de Cajero Automático',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-        backgroundColor: Colors.transparent, // Hacer el fondo del AppBar transparente
-        elevation: 0, // Quitar la sombra del AppBar
-        centerTitle: true,
-      ),
-      extendBodyBehindAppBar: true, // Extender el cuerpo detrás del AppBar
+      appBar: const CustomHeader(title: 'Simulador de Cajero Automático'),
+      extendBodyBehindAppBar: true,
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.lightBlueAccent, Colors.blue],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
+        decoration: AppStyles.fondoGradiente,
         child: Column(
           children: [
-            const SizedBox(height: 60), // Ajusta este valor para mover el logo hacia abajo
+            AppStyles.logoSizedBox(height: 130), // Regula la posición del logo
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: AppStyles.paddingLogo,
               child: CircleAvatar(
-                radius: 50, // Ajusta este valor según sea necesario
+                radius: AppStyles.logoRadius,
                 backgroundColor: Colors.white,
                 child: ClipOval(
                   child: Image.asset(
@@ -88,18 +75,17 @@ class _InsertarTarjetaScreenState extends State<InsertarTarjetaScreen> with Sing
                 ),
               ),
             ),
-            const SizedBox(height: 50), // Añadir un poco de espacio debajo del logo
             Expanded(
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      _isReading ? 'Leyendo los datos de la tarjeta...' : 'Ingrese su tarjeta por favor',
-                      style: const TextStyle(fontSize: 30, color: Colors.white),
+                      _isReading ? 'Estamos leyendo los datos de la tarjeta' : 'Ingrese su tarjeta por favor',
+                      style: AppStyles.textoEncabezado,
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 0),
+                    const SizedBox(height: 50),
                     SlideTransition(
                       position: _animation,
                       child: Image.asset(

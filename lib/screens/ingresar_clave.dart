@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:atm_simulator/styles/styles.dart';
+import 'menu_principal.dart'; // Asegúrate de importar el archivo
 
 class IngresarClaveScreen extends StatelessWidget {
   const IngresarClaveScreen({super.key});
@@ -6,35 +8,20 @@ class IngresarClaveScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Simulador de Cajero Automático',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-        backgroundColor: Colors.transparent, // Hacer el fondo del AppBar transparente
-        elevation: 0, // Quitar la sombra del AppBar
-        centerTitle: true,
-      ),
-      extendBodyBehindAppBar: true, // Extender el cuerpo detrás del AppBar
+      appBar: const CustomHeader(title: 'Simulador de Cajero Automático'),
+      extendBodyBehindAppBar: true,
       body: Container(
-        width: double.infinity, // Asegurar que el contenedor cubra todo el ancho
-        height: double.infinity, // Asegurar que el contenedor cubra toda la altura
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.lightBlueAccent, Colors.blueAccent],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
+        width: double.infinity,
+        height: double.infinity,
+        decoration: AppStyles.fondoGradiente,
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Logo en la parte superior
-              const SizedBox(height: 60), // Ajusta este valor para mover el logo hacia abajo
+              AppStyles.logoSizedBox(height: 130), // Regula la posición del logo
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: AppStyles.paddingLogo,
                 child: CircleAvatar(
-                  radius: 50, // Ajusta este valor según sea necesario
+                  radius: AppStyles.logoRadius,
                   backgroundColor: Colors.white,
                   child: ClipOval(
                     child: Image.asset(
@@ -45,30 +32,28 @@ class IngresarClaveScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 50), // Añadir un poco de espacio debajo del logo
-              // Texto de instrucción
+              const SizedBox(height: 50),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
                   'Ingresa tu clave en el teclado numérico',
-                  style: TextStyle(fontSize: 30, color: Color.fromARGB(255, 255, 255, 255)),
+                  style: AppStyles.textoEncabezado,
                   textAlign: TextAlign.center,
                 ),
               ),
-              const SizedBox(height: 50), // Añadir espacio entre el texto y el campo de entrada
-              // Campo de entrada para la clave
+              const SizedBox(height: 50),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 50.0),
                 child: TextField(
-                  maxLength: 4, // Limitar la entrada a 4 dígitos
-                  keyboardType: TextInputType.number, // Mostrar solo el teclado numérico
-                  obscureText: true, // Ocultar la entrada
+                  maxLength: 4,
+                  keyboardType: TextInputType.number,
+                  obscureText: true,
                   decoration: InputDecoration(
-                    counterText: '', // Ocultar el contador de caracteres
-                    hintText: '****', // Texto de marcador de posición
-                    hintStyle: TextStyle(fontSize: 24, color: Colors.black),
+                    counterText: '',
+                    hintText: '****',
+                    hintStyle: AppStyles.inputHintStyle,
                     filled: true,
-                    fillColor: Color.fromARGB(255, 200, 200, 200), // Color de fondo del campo de entrada
+                    fillColor: Color.fromARGB(255, 255, 255, 255),
                     border: OutlineInputBorder(),
                   ),
                   style: TextStyle(fontSize: 24, color: Colors.black),
@@ -76,19 +61,18 @@ class IngresarClaveScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30),
-              // Botón de ingreso
               ElevatedButton.icon(
                 onPressed: () {
-                  // Lógica para validar el ingreso de la clave
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MenuPrincipalScreen()),
+                  );
                 },
-                icon: const Icon(Icons.login, color: Color.fromARGB(255, 105, 108, 241)),
+                icon: const Icon(Icons.login, color: Color.fromARGB(255, 109, 69, 211)),
                 label: const Text('Ingresar'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white, // Cambiado de 'primary' a 'backgroundColor'
-                  textStyle: const TextStyle(fontSize: 20),
-                ),
+                style: AppStyles.primaryButton,
               ),
-              const SizedBox(height: 20), // Añadir un poco de espacio debajo del botón
+              const SizedBox(height: 20),
             ],
           ),
         ),
