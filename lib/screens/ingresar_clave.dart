@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:atm_simulator/styles/styles.dart';
-import 'menu_principal.dart'; // Asegúrate de importar el archivo
+import 'menu_principal.dart';
 
 class IngresarClaveScreen extends StatelessWidget {
   const IngresarClaveScreen({super.key});
@@ -17,7 +17,7 @@ class IngresarClaveScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              AppStyles.logoSizedBox(height: 130), // Regula la posición del logo
+              AppStyles.logoSizedBox(height: 130),
               Padding(
                 padding: AppStyles.paddingLogo,
                 child: CircleAvatar(
@@ -27,12 +27,13 @@ class IngresarClaveScreen extends StatelessWidget {
                     child: Image.asset(
                       'assets/images/logo.png',
                       height: 80,
-                      fit: BoxFit.contain,
+                      fit: BoxFit.contain,                      
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 50),
+
+              const SizedBox(height: 150), // Espacio entre el logo y el texto
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
@@ -65,7 +66,9 @@ class IngresarClaveScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const MenuPrincipalScreen()),
+                    MaterialPageRoute(
+                      builder: (context) => const MenuPrincipalScreen(), // Ya no necesitas pasar el saldo aquí
+                    ),
                   );
                 },
                 icon: const Icon(Icons.login, color: Color.fromARGB(255, 109, 69, 211)),

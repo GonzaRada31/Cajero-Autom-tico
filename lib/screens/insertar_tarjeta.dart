@@ -30,7 +30,7 @@ class InsertarTarjetaScreenState extends State<InsertarTarjetaScreen> with Singl
       curve: Curves.easeInOut,
     ));
 
-    _controller.forward().then((_) {  // Se ejecuta cuando la animación termina
+    _controller.forward().then((_) {  
       setState(() {
         _isReading = true;
       });
@@ -44,7 +44,7 @@ class InsertarTarjetaScreenState extends State<InsertarTarjetaScreen> with Singl
       });
     });
   }
-  // Se usa para liberar recursos cuando el widget es eliminado 
+
   @override
   void dispose() {
     _controller.dispose();
@@ -60,7 +60,7 @@ class InsertarTarjetaScreenState extends State<InsertarTarjetaScreen> with Singl
         decoration: AppStyles.fondoGradiente,
         child: Column(
           children: [
-            AppStyles.logoSizedBox(height: 130), // Regula la posición del logo
+            AppStyles.logoSizedBox(height: 130),
             Padding(
               padding: AppStyles.paddingLogo,
               child: CircleAvatar(
@@ -89,8 +89,8 @@ class InsertarTarjetaScreenState extends State<InsertarTarjetaScreen> with Singl
                     SlideTransition(
                       position: _animation,
                       child: Image.asset(
-                        'assets/images/tarjeta_perfil.png', // Ruta de tu imagen de la tarjeta de perfil
-                        width: 200,
+                        'assets/images/tarjeta_perfil.png', 
+                        width: 300, // Controla el tamaño de la imagen
                       ),
                     ),
                   ],

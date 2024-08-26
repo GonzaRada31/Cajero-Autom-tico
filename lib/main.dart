@@ -1,12 +1,22 @@
-// lib/main.dart
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'providers/saldo_provider.dart';
 import 'screens/pantalla_inicio.dart';
 import 'screens/insertar_tarjeta.dart';
 import 'screens/ingresar_clave.dart';
 import 'screens/menu_principal.dart';
+import 'screens/consultar_saldo.dart';
+import 'screens/retirar_dinero.dart';
 
 void main() {
-  runApp(const SimuladorCajeroApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => SaldoProvider()),
+      ],
+      child: const SimuladorCajeroApp(),
+    ),
+  );
 }
 
 class SimuladorCajeroApp extends StatelessWidget {
@@ -30,6 +40,8 @@ class SimuladorCajeroApp extends StatelessWidget {
         '/insertar_tarjeta': (context) => const InsertarTarjetaScreen(),
         '/ingresar_clave': (context) => const IngresarClaveScreen(),
         '/menu_principal': (context) => const MenuPrincipalScreen(),
+        '/consultar_saldo': (context) => const ConsultarSaldoScreen(), // Ya no se pasa saldo aquí
+        '/retirar_dinero': (context) => const RetirarDineroScreen(),
       },
     );
   }

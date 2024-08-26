@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:atm_simulator/styles/styles.dart';
+import 'package:atm_simulator/screens/insertar_tarjeta.dart'; // Importa la pantalla de insertar tarjeta
 import 'dart:async';
 
 class PantallaInicio extends StatefulWidget {
@@ -11,6 +12,9 @@ class PantallaInicio extends StatefulWidget {
 
 class PantallaInicioState extends State<PantallaInicio> {
   int _currentIndex = 0;
+  double saldo = 350000; // Saldo inicial
+  Timer? _timer; // Almacena la referencia del Timer
+
   final List<String> _mensajes = [
     "Recordá que tus claves son personales, no las compartas con nadie",
     "Asegúrate de recoger tu tarjeta de débito o crédito, dinero en efectivo y comprobante de operación",
@@ -20,11 +24,19 @@ class PantallaInicioState extends State<PantallaInicio> {
   @override
   void initState() {
     super.initState();
-    Timer.periodic(const Duration(seconds: 6), (Timer timer) {
-      setState(() {
-        _currentIndex = (_currentIndex + 1) % _mensajes.length;
-      });
+    _timer = Timer.periodic(const Duration(seconds: 6), (Timer timer) {
+      if (mounted) { // Verifica si el widget está montado
+        setState(() {
+          _currentIndex = (_currentIndex + 1) % _mensajes.length;
+        });
+      }
     });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel(); // Cancela el Timer cuando el widget se elimina
+    super.dispose();
   }
 
   @override
@@ -39,7 +51,7 @@ class PantallaInicioState extends State<PantallaInicio> {
           ),
           Column(
             children: [
-              AppStyles.logoSizedBox(height: 130), // Ajusta este valor para mover el logo hacia abajo
+              AppStyles.logoSizedBox(height: 130),
               Padding(
                 padding: AppStyles.paddingLogo,
                 child: CircleAvatar(
@@ -86,7 +98,19 @@ class PantallaInicioState extends State<PantallaInicio> {
                     Expanded(
                       child: ElevatedButton.icon(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/insertar_tarjeta');
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (context, animation, secondaryAnimation) => const InsertarTarjetaScreen(),
+                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                const begin = Offset(0.0, 1.0); // Desde abajo
+                                const end = Offset.zero;
+                                final tween = Tween(begin: begin, end: end);
+                                final offsetAnimation = animation.drive(tween);
+                                return SlideTransition(position: offsetAnimation, child: child);
+                              },
+                            ),
+                          );
                         },
                         icon: const Icon(Icons.credit_card),
                         label: const Text(
